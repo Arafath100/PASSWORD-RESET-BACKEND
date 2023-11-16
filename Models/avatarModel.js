@@ -9,3 +9,4 @@ const avatarSchema = new mongoose.Schema({
 const avatar = mongoose.model('avatar', avatarSchema);
 
 module.exports = avatar;
+
