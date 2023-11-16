@@ -13,13 +13,15 @@ connectDB();
 
 require("dotenv").config();
 
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 8000;
 
 app.use("/api", routes);
 
 app.get("/", function (_request, response) {
   response.send('PassWord Reset Flow');
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT:${PORT}`);
