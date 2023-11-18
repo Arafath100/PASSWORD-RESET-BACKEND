@@ -10,7 +10,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 exports.signup = async (req, res) => {
     try {
-      const { email, password, userName, mobileNumber, avatar } = req.body;
+      const { email, password, userName, mobileNumber } = req.body;
   
       const existingUser = await User.findOne({ email });
   
@@ -20,7 +20,7 @@ exports.signup = async (req, res) => {
   
       const hashedPassword = await bcrypt.hash(password, 10);
   
-      const newUser = new User({ email, password: hashedPassword, userName, mobileNumber, avatar });
+      const newUser = new User({ email, password: hashedPassword, userName, mobileNumber });
       
       await newUser.save();
   
@@ -57,7 +57,6 @@ exports.signup = async (req, res) => {
         message: 'Login successful',
         token,
         userName: user.userName,
-        avatar: user.avatar 
       });
     } catch (err) {
       res.status(500).json({ error: 'Internal server error', err });
