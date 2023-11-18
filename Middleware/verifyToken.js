@@ -1,7 +1,7 @@
-// middleware/verifyToken.js
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = process.env.SECRET_KEY;
 
+// Middleware function to verify JWT token
 const verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
 
@@ -13,7 +13,7 @@ const verifyToken = (req, res, next) => {
     if (err) {
       return res.status(401).json({ error: 'Access denied. Invalid token.' });
     }
-    req.user = user; // Set the user information in the request object for further use
+    req.user = user;
     next();
   });
 };
