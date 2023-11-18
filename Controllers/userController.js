@@ -68,7 +68,7 @@ exports.forgotPassword = async (req, res) => {
       const { email } = req.body;
   
       const user = await User.findOne({ email });
-  
+      console.log("user:", user);
       if (!user) {
         return res.status(404).json({ error: 'User not found' });
       }
@@ -81,7 +81,7 @@ exports.forgotPassword = async (req, res) => {
   
       
       const transporter = nodemailer.createTransport({
-        service: 'Outlook', // Example: 'Gmail', 'Outlook'
+        service: 'Gmail', // Example: 'Gmail', 'Outlook'
         auth: {
           user: EMAIL,
           pass: PASS
@@ -99,7 +99,9 @@ exports.forgotPassword = async (req, res) => {
       };
   
       // Sending the email
+      console.log("UserEmail:", user.email);
       transporter.sendMail(mailOptions, (error, info) => {
+        console.log("Mail:", mailOptions);
         if (error) {
           console.log(error);
           res.status(500).json({ error: 'Error sending email' });
